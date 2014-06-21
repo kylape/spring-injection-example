@@ -2,3 +2,4 @@ tags
 cscope.*
 target/
 *.class
+*.log.*
