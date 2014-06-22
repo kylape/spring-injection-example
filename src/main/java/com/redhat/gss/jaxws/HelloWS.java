@@ -7,15 +7,31 @@
 
 package com.redhat.gss.jaxws;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.jboss.logging.Logger;
+import javax.annotation.PostConstruct;
 
 @javax.jws.WebService(endpointInterface="com.redhat.gss.jaxws.Hello")
 public class HelloWS implements Hello {
   private Logger log = Logger.getLogger(this.getClass().getName());
 
+  @Autowired
+  private HelloDelegate delegate;
+
   public String hello(String name) throws Exception {
-    String greeting = "Hello, " + name;
+    log.warn("Hash code: " + Integer.toHexString(hashCode()));
+    if(delegate == null)
+      throw new IllegalStateException("Delegate not injected");
+
+    String greeting = delegate.greet(name);
     log.info(greeting);
     return greeting;
+  }
+
+  @PostConstruct
+  public void postConstruct() {
+    log.warn("Hash code: " + Integer.toHexString(hashCode()));
+    SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
   }
 }
