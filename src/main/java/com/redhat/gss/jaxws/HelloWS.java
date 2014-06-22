@@ -28,10 +28,4 @@ public class HelloWS implements Hello {
     log.info(greeting);
     return greeting;
   }
-
-  @PostConstruct
-  public void postConstruct() {
-    log.warn("Hash code: " + Integer.toHexString(hashCode()));
-    SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-  }
 }
