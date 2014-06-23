@@ -1,6 +1,6 @@
-#Simple JBossWS-CXF web service with Spring
+#JBossWS-CXF Spring Injection Example
 
-This shows how to set up a simple `jbossws-cxf.xml` file to be picked up by JBossWS to configure CXF via a Spring beans file.  
+This shows how to configure an application to inject beans into a JAX-WS endpoint using Spring.
 
 ##Instructions
 
